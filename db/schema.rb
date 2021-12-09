@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2021_12_09_100927) do
   create_table "questions", force: :cascade do |t|
     t.string "title", limit: 30, null: false
     t.text "content"
-    t.boolean "solved_check", null: false
+    t.boolean "solved_check"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

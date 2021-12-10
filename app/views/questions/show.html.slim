@@ -13,3 +13,5 @@ table.table.table-hover
     tr
       th= Question.human_attribute_name(:created_at)
       td= @question.created_at.strftime('%Y/%m/%d %H:%M:%S')
+
+= link_to '編集', edit_question_path, class: 'btn btn-primary mr-3'

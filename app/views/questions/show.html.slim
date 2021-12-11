@@ -15,3 +15,5 @@ table.table.table-hover
       td= @question.created_at.strftime('%Y/%m/%d %H:%M:%S')
 
 = link_to '編集', edit_question_path, class: 'btn btn-primary mr-3'
+= link_to '削除', @question, method: :delete,
+                  data: { confirm: "質問「#{@question.title}」を削除します。よろしいでしょうか？" }, class: 'btn btn-danger'

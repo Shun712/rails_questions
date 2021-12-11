@@ -31,6 +31,12 @@ class QuestionsController < ApplicationController
     redirect_to questions_url, notice: "質問「#{question.title}」を更新しました。" 
   end
 
+  def destroy
+    question = Question.find(params[:id])
+    question.destroy
+    redirect_to questions_url, notice: "質問「#{question.title}」を削除しました。"
+  end
+
   private
 
     def question_params

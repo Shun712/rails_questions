@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_12_133441) do
+ActiveRecord::Schema.define(version: 2021_12_12_134100) do
 
   create_table "questions", force: :cascade do |t|
     t.string "title", limit: 30, null: false
     t.text "content"
-    t.boolean "solved_check"
+    t.boolean "solved_check", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2021_12_12_133441) do
     t.string "picture"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

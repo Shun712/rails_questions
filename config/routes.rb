@@ -3,13 +3,14 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   namespace :admin do
-    resources :users
-    resources :questions, only: %i[index show destroy]
+    resources :users, only: %i[index destroy]
+    resources :questions, only: %i[index destroy]
     get '/login', to: 'sessions#new'
     post '/login', to: 'sessions#create'
     delete '/logout', to: 'sessions#destroy'
   end
   root to: 'questions#index'
+  resources :users
   resources :questions do
     resources :answers, only: %i[create]
   end

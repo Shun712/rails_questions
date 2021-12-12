@@ -5,6 +5,9 @@ h1 質問の詳細
 table.table.table-hover
   tbody
     tr
+      th= User.human_attribute_name(:name)
+      td= @question.user.name
+    tr
       th= Question.human_attribute_name(:title)
       td= @question.title
     tr
@@ -14,7 +17,7 @@ table.table.table-hover
       th= Question.human_attribute_name(:created_at)
       td= @question.created_at.strftime('%Y/%m/%d %H:%M')
 
-- if current_user.admin?
+- if @question.user == current_user
   = link_to '編集', edit_question_path, class: 'btn btn-primary mr-3'
   = link_to '削除', @question, method: :delete,
                             data: { confirm: "質問「#{@question.title}」を削除します。よろしいでしょうか？" }, class: 'btn btn-danger'

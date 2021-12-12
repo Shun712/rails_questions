@@ -1,5 +1,7 @@
 h1 ユーザー一覧
 
+= link_to '新規登録', new_user_path, class: 'btn btn-primary'
+
 .mb-3
 table.table.table-hover
   thread.thread-default
@@ -15,8 +17,10 @@ table.table.table-hover
           td= image_tag user.picture.variant(resize:'50x50')
         - else
           th= image_tag '/no_image.png', size:'50x50'
-        td= user.nickname
+        td= link_to user.nickname, user_path(user)
         td= user.email
         td
-          = link_to '削除', [:admin, user], method: :delete,
-                            data: { confirm: "質問「#{user.name}」を削除します。よろしいでしょうか？" }, class: 'btn btn-danger'
+          - if user == current_user
+            = link_to '編集', edit_user_path(user), class: 'btn btn-primary mr-3'
+            = link_to '削除', user, method: :delete,
+                                   data: { confirm: "質問「#{user.name}」を削除します。よろしいでしょうか？" }, class: 'btn btn-danger'

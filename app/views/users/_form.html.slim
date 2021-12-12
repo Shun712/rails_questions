@@ -3,7 +3,7 @@
     -user.errors.full_messages.each do |message|
       li= message
 
-= form_with model: [:admin, user], local: true do |f|
+= form_with model: user, local: true do |f|
   .form-group
     = f.label :picture, 'プロフィール画像'
     = f.file_field :picture

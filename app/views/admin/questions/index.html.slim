@@ -1,7 +1,5 @@
 h1 質問一覧
 
-= link_to '質問投稿をする', new_question_path, class: 'btn btn-primary'
-
 .mb-3
 table.table.table-hover
   thread.thread-default
@@ -17,7 +15,7 @@ table.table.table-hover
           td= link_to(image_tag(question.user.picture.variant(resize:'50x50')), admin_user_path(question.user))
         - else
           td= link_to question.user.name, admin_user_path(question.user)
-        td= link_to question.title, admin_question_path(question)
+        td= question.title
         td= question.created_at.strftime('%Y/%m/%d %H:%M')
         td
             = link_to '削除', question, method: :delete,

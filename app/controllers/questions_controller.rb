@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  before_action :set_question, only: [:show, :edit, :update, :destroy]
+
   def index
     @questions = Question.all
   end
@@ -18,28 +20,28 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.find(params[:id])
   end
 
   def edit
-    @question = Question.find(params[:id])
   end
 
   def update
-    question = Question.find(params[:id])
-    question.update!(question_params)
-    redirect_to questions_url, notice: "質問「#{question.title}」を更新しました。" 
+    @question.update!(question_params)
+    redirect_to questions_url, notice: "質問「#{@question.title}」を更新しました。" 
   end
 
   def destroy
-    question = Question.find(params[:id])
-    question.destroy
-    redirect_to questions_url, notice: "質問「#{question.title}」を削除しました。"
+    @question.destroy
+    redirect_to questions_url, notice: "質問「#{@question.title}」を削除しました。"
   end
 
   private
 
     def question_params
       params.require(:question).permit(:title, :content)
+    end
+
+    def set_question
+      @question = Question.find(params[:id])
     end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_09_100927) do
+ActiveRecord::Schema.define(version: 2021_12_12_133441) do
 
   create_table "questions", force: :cascade do |t|
     t.string "title", limit: 30, null: false
@@ -18,6 +18,17 @@ ActiveRecord::Schema.define(version: 2021_12_09_100927) do
     t.boolean "solved_check"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "password_digest", null: false
+    t.string "nickname"
+    t.string "picture"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end

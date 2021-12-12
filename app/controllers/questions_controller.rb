@@ -20,6 +20,8 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    @answers = @question.answers.includes(:user).order(created_at: :desc)
+    @answer = Answer.new
   end
 
   def edit

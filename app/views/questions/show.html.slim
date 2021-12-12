@@ -14,6 +14,19 @@ table.table.table-hover
       th= Question.human_attribute_name(:created_at)
       td= @question.created_at.strftime('%Y/%m/%d %H:%M:%S')
 
-= link_to '編集', edit_question_path, class: 'btn btn-primary mr-3'
-= link_to '削除', @question, method: :delete,
-                  data: { confirm: "質問「#{@question.title}」を削除します。よろしいでしょうか？" }, class: 'btn btn-danger'
+- if current_user.admin?
+  = link_to '編集', edit_question_path, class: 'btn btn-primary mr-3'
+  = link_to '削除', @question, method: :delete,
+                            data: { confirm: "質問「#{@question.title}」を削除します。よろしいでしょうか？" }, class: 'btn btn-danger'
+
+= form_with(model:[@question, @answer], local: true) do |f|
+  .form-group
+    = f.text_area :content, row: 5, class: 'form-control', id: 'answer_content', placeholder: '回答' 
+    = f.submit '回答する', class: 'btn btn-primary'
+
+h4 回答一覧
+- if @answers
+  - @answers.each do |answer|
+    p  = answer.user.name
+    p  = answer.content
+    p  = answer.created_at.strftime('%Y/%m/%d %H:%M')

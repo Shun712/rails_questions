@@ -1,7 +1,7 @@
-h1 ログイン
+h1 管理画面用ログイン
 
 .nav.justify-content-end
-  = link_to '管理画面用ログイン', 'admin/login', class: 'nav-link'
+  = link_to '一般用ログイン', '../login', class: 'nav-link'
 
 = form_with scope: :session, local: true do |f|
   .form-group

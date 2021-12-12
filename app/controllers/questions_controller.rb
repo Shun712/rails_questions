@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
     @question = current_user.questions.new(question_params)
 
     if @question.save
-      redirect_to @questions, notice: "質問「#{@question.title}」を投稿しました。"
+      redirect_to questions_url, notice: "質問「#{@question.title}」を投稿しました。"
     else
       render :new
     end

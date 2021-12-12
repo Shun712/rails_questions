@@ -5,6 +5,10 @@ h1 ユーザー詳細
 table.table.table-hover
   tbody
     tr
+      - if @user.picture.attached?
+        th= User.human_attribute_name(:picture)
+        td= image_tag @user.picture.variant(resize:'100x100')
+    tr
       th= User.human_attribute_name(:nickname)
       td= @user.nickname
     tr

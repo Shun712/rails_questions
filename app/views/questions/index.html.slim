@@ -6,12 +6,17 @@ h1 質問一覧
 table.table.table-hover
   thread.thread-default
     tr
+      th= User.human_attribute_name(:name)
       th= Question.human_attribute_name(:title)
       th= Question.human_attribute_name(:created_at)
       th
   tbody
     - @questions.each do |question|
       tr
+        - if question.user.picture.attached?
+          td= link_to(image_tag(question.user.picture.variant(resize:'50x50')), admin_user_path(question.user))
+        - else
+          td= link_to question.user.name, admin_user_path(question.user)
         td= link_to question.title, question_path(question)
         td= question.created_at.strftime('%Y/%m/%d %H:%M')
         td

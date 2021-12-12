@@ -6,18 +6,20 @@ h1 ユーザー一覧
 table.table.table-hover
   thread.thread-default
     tr
+      th= User.human_attribute_name(:picture)
       th= User.human_attribute_name(:nickname)
       th= User.human_attribute_name(:email)
-      th= User.human_attribute_name(:admin)
       th
   tbody
     - @users.each do |user|
       tr
+        - if user.picture.attached?
+          td= image_tag user.picture.variant(resize:'50x50')
+        - else
+          th= image_tag '/no_image.png', size:'50x50'
         td= link_to user.nickname, [:admin, user]
         td= user.email
-        td= user.admin? ? 'あり' : 'なし'
         td
           = link_to '編集', edit_admin_user_path(user), class: 'btn btn-primary mr-3'
           = link_to '削除', [:admin, user], method: :delete,
                             data: { confirm: "質問「#{user.name}」を削除します。よろしいでしょうか？" }, class: 'btn btn-danger'
-

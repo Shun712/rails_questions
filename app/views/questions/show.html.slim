@@ -21,6 +21,10 @@ table.table.table-hover
   = link_to '編集', edit_question_path, class: 'btn btn-primary mr-3'
   = link_to '削除', @question, method: :delete,
                             data: { confirm: "質問「#{@question.title}」を削除します。よろしいでしょうか？" }, class: 'btn btn-danger'
+  - if @question.solved_check
+    = link_to '未解決に戻す', question_path(@question.id, question: {solved_check: false}), method: :put
+  - else
+    = link_to '解決済み', question_path(@question.id, question: {solved_check: true}), method: :put
 
 = form_with(model:[@question, @answer], local: true) do |f|
   .form-group

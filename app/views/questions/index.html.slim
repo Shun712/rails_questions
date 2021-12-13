@@ -1,6 +1,9 @@
 h1 質問一覧
 
 = link_to '質問投稿をする', new_question_path, class: 'btn btn-primary'
+= link_to 'すべて', questions_path, class: 'btn btn-primary'
+= link_to '未解決', questions_path(solved_check: false), class: 'btn btn-primary'
+= link_to '解決済み', questions_path(solved_check: true), class: 'btn btn-primary'
 
 .mb-3
 table.table.table-hover

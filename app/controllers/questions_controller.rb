@@ -2,7 +2,13 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
   def index
-    @questions = Question.all
+    if params[:solved_check] == 'false'
+      @questions = Question.where(solved_check: false)
+    elsif params[:solved_check] == 'true'
+      @questions = Question.where(solved_check: true)
+    else
+      @questions = Question.all
+    end
   end
 
   def new

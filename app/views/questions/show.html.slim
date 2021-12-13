@@ -5,7 +5,7 @@ h1 質問の詳細
 table.table.table-hover
   tbody
     tr
-      th= User.human_attribute_name(:name)
+      th= User.human_attribute_name('投稿者')
       td= @question.user.name
     tr
       th= Question.human_attribute_name(:title)

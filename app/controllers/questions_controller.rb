@@ -4,11 +4,11 @@ class QuestionsController < ApplicationController
 
   def index
     if params[:solved_check] == 'false'
-      @questions = Question.where(solved_check: false)
+      @questions = Question.where(solved_check: false).paginate(page: params[:page])
     elsif params[:solved_check] == 'true'
-      @questions = Question.where(solved_check: true)
+      @questions = Question.where(solved_check: true).paginate(page: params[:page])
     else
-      @questions = Question.all
+      @questions = Question.paginate(page: params[:page])
     end
   end
 

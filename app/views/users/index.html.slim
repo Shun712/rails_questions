@@ -24,3 +24,5 @@ table.table.table-hover
             = link_to '編集', edit_user_path(user), class: 'btn btn-primary mr-3'
             = link_to '削除', user, method: :delete,
                                    data: { confirm: "質問「#{user.name}」を削除します。よろしいでしょうか？" }, class: 'btn btn-danger'
+.container
+  = will_paginate @questions, previous_label: '&lt 前へ', next_label: '次へ &gt'

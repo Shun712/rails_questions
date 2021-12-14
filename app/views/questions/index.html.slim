@@ -12,3 +12,5 @@ h1 質問一覧
     = f.submit nil, class: 'btn btn-primay'
 
 = render partial: 'question', locals: { question: @question }
+.container
+  = will_paginate @questions, previous_label: '&lt 前へ', next_label: '次へ &gt'

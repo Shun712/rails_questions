@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   resources :users
   resources :questions do
     resources :answers, only: %i[create]
+    collection do
+      get 'search'
+    end
   end
   post '/questions/:id/answers', to: 'answers#create'
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?

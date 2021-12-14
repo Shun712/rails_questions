@@ -5,27 +5,10 @@ h1 質問一覧
 = link_to '未解決', questions_path(solved_check: false), class: 'btn btn-primary'
 = link_to '解決済み', questions_path(solved_check: true), class: 'btn btn-primary'
 
-.mb-3
-table.table.table-hover
-  thread.thread-default
-    tr
-      th= User.human_attribute_name('投稿者')
-      th= Question.human_attribute_name(:title)
-      th= Question.human_attribute_name(:created_at)
-      th= Question.human_attribute_name('状態')
-      th
-  tbody
-    - @questions.each do |question|
-      tr
-        - if question.user.picture.attached?
-          td= link_to(image_tag(question.user.picture.variant(resize:'50x50')), user_path(question.user))
-        - else
-          td= link_to image_tag('/no_image.png', size:'50x50'), user_path(question.user)
-        td= link_to question.title, question_path(question)
-        td= question.created_at.strftime('%Y/%m/%d %H:%M')
-        td= question.solved_check ? '解決済み' : '未解決'
-        td
-            - if question.user == current_user
-              = link_to '編集', edit_question_path(question), class: 'btn btn-primary mr-3'
-              = link_to '削除', question, method: :delete,
-                              data: { confirm: "質問「#{question.title}」を削除します。よろしいでしょうか？" }, class: 'btn btn-danger'
+= search_form_for @q, url: search_questions_path do |f|
+  .form-group
+    = f.search_field :title_cont, placeholder: '検索ワード', class: 'form-control'
+  .form-group
+    = f.submit nil, class: 'btn btn-primay'
+
+= render partial: 'question', locals: { question: @question }

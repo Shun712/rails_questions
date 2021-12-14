@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_question, only: %i[show edit update destroy]
+  before_action :set_q, only: %i[index search]
 
   def index
     if params[:solved_check] == 'false'
@@ -47,6 +48,10 @@ class QuestionsController < ApplicationController
     redirect_to questions_url, notice: "質問「#{@question.title}」を削除しました。"
   end
 
+  def search
+    @questions = @q.result
+  end
+
   private
 
     def question_params
@@ -55,5 +60,9 @@ class QuestionsController < ApplicationController
 
     def set_question
       @question = Question.find(params[:id])
+    end
+
+    def set_q
+      @q = Question.ransack(params[:q])
     end
 end

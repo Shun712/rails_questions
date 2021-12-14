@@ -49,7 +49,7 @@ class QuestionsController < ApplicationController
   end
 
   def search
-    @questions = @q.result
+    @questions = @q.result.includes(:user).page(params[:page])
   end
 
   private

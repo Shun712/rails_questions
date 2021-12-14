@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   namespace :admin do
     resources :users, only: %i[index destroy]
-    resources :questions, only: %i[index destroy]
+    resources :questions, only: %i[index destroy] do
+      collection do
+        get 'search'
+      end
+    end
     get '/login', to: 'sessions#new'
     post '/login', to: 'sessions#create'
     delete '/logout', to: 'sessions#destroy'

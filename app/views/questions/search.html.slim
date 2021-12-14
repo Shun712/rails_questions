@@ -1,3 +1,7 @@
 h1 検索結果
 
-= render partial: 'question', locals: { question: @question }
+- if @questions.any?
+  = render partial: 'question', locals: { question: @question }
+  = will_paginate @questions, previous_label: '&lt 前へ', next_label: '次へ &gt'
+- else
+  h1 '検索結果がありません。'

@@ -9,7 +9,7 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
     .app-title.navbar.navbar-expand-md.navbar-light.bg-light
-      .navbar-brand 質問アプリ
+      .navbar-brand= link_to(image_tag('/logo.png', size:'75x50'), root_url)
 
       ul.navbar-nav.ml-auto
         - if current_user

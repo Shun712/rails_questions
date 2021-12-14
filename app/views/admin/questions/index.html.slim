@@ -1,6 +1,6 @@
 h1 質問一覧
 
-= search_form_for @q, url: admin_search_questions_path do |f|
+= search_form_for @q, url: search_admin_questions_path do |f|
   .form-group
     = f.search_field :title_cont, placeholder: '検索ワード', class: 'form-control'
   .form-group
@@ -18,9 +18,9 @@ table.table.table-hover
     - @questions.each do |question|
       tr
         - if question.user.picture.attached?
-          td= link_to(image_tag(question.user.picture.variant(resize:'50x50')), admin_user_path(question.user))
+          td= image_tag question.user.picture.variant(resize:'50x50')
         - else
-          td= link_to question.user.name, admin_user_path(question.user)
+          td= question.user.name
         td= question.title
         td= question.created_at.strftime('%Y/%m/%d %H:%M')
         td

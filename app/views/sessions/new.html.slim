@@ -1,14 +1,15 @@
-h1 ログイン
-
-.nav.justify-content-end
-  = link_to '管理画面用ログイン', 'admin/login', class: 'nav-link'
-  = link_to '新規登録', new_user_path, class: 'btn btn-primary'
-
-= form_with scope: :session, local: true do |f|
-  .form-group
-    = f.label :email, 'メールアドレス'
-    = f.text_field :email, class: 'form-control', id: 'session_email'
-  .form-group
-    = f.label :password, 'パスワード'
-    = f.text_field :password, class: 'form-control', id: 'session_password'
-  = f.submit 'ログインする', class: 'btn btn-primary'
+.container
+  .row.justify-content-md-center
+    .col.col-md-auto
+      = image_tag('/logo.png', size:'250x200')
+    .container
+      h2 ログイン
+      .container
+        .row.justify-content-md-center
+          .col.col-md-5.col-md-offset-7
+            = form_with scope: :session, local: true do |f|
+              .form-group.mt-2
+                = f.text_field :email, placeholder: 'メールアドレス', class: 'form-control', id: 'session_email'
+              .form-group.mt-2.mb-2
+                = f.text_field :password, placeholder: 'パスワード', class: 'form-control', id: 'session_password'
+              = f.submit 'ログインする', class: 'btn btn-primary'

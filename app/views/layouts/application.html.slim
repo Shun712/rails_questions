@@ -2,12 +2,12 @@ doctype html
 html
   head
     title
-      | 質問アプリ
+      | Q & A
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  body
+  body.text-center
     .navbar.navbar-expand-md.navbar-light.bg-light
       .container-fluid
         .navbar-brand= link_to(image_tag('/logo.png', size:'75x50'), root_url)
@@ -25,8 +25,10 @@ html
             - else
               td= link_to image_tag('/no_image.png', size:'50x50'), user_path(current_user)
           - else
+            li.nav-item== link_to '新規登録', new_user_path, class: 'nav-link'
             li.nav-item= link_to 'ログイン', login_path, class: 'nav-link'
+            li.nav-item= link_to '管理画面用ログイン', 'admin/login', class: 'nav-link'
     .container
       - if flash.notice.present?
         .alert.alert-success= flash.notice
-    = yield
+      = yield

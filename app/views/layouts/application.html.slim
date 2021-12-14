@@ -8,20 +8,24 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    .app-title.navbar.navbar-expand-md.navbar-light.bg-light
-      .navbar-brand= link_to(image_tag('/logo.png', size:'75x50'), root_url)
-
-      ul.navbar-nav.ml-auto
-        - if current_user
-          - if current_user.admin?
-            li.nav-item= link_to '質問一覧(管理画面用)', admin_questions_path, class: 'nav-link'
-            li.nav-item= link_to 'ユーザー一覧(管理画面用)', admin_users_path, class: 'nav-link'
+    .navbar.navbar-expand-md.navbar-light.bg-light
+      .container-fluid
+        .navbar-brand= link_to(image_tag('/logo.png', size:'75x50'), root_url)
+        ul.navbar-nav.ml-auto
+          - if current_user
+            - if current_user.admin?
+              li.nav-item= link_to '質問一覧(管理画面用)', admin_questions_path, class: 'nav-link'
+              li.nav-item= link_to 'ユーザー一覧(管理画面用)', admin_users_path, class: 'nav-link'
+            - else
+              li.nav-item= link_to '質問一覧', questions_path, class: 'nav-link'
+              li.nav-item= link_to 'ユーザー一覧', users_path, class: 'nav-link'
+            li.nav-item= link_to 'ログアウト', logout_path, method: :delete, class: 'nav-link'
+            - if current_user.picture.attached?
+              td= link_to(image_tag(current_user.picture.variant(resize:'50x50')), user_path(current_user))
+            - else
+              td= link_to image_tag('/no_image.png', size:'50x50'), user_path(current_user)
           - else
-            li.nav-item= link_to '質問一覧', questions_path, class: 'nav-link'
-            li.nav-item= link_to 'ユーザー一覧', users_path, class: 'nav-link'
-          li.nav-item= link_to 'ログアウト', logout_path, method: :delete, class: 'nav-link'
-        - else
-          li.nav-item= link_to 'ログイン', login_path, class: 'nav-link'
+            li.nav-item= link_to 'ログイン', login_path, class: 'nav-link'
     .container
       - if flash.notice.present?
         .alert.alert-success= flash.notice

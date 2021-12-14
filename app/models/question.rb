@@ -3,7 +3,7 @@ class Question < ApplicationRecord
   before_validation :set_titleless_title
   belongs_to :user
   has_many :answers, dependent: :destroy
-  scope :recent, -> { order(created_at: :desc) }
+  default_scope -> { order(created_at: :desc) }
 
   private
 

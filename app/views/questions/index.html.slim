@@ -12,7 +12,7 @@ table.table.table-hover
       th= User.human_attribute_name('投稿者')
       th= Question.human_attribute_name(:title)
       th= Question.human_attribute_name(:created_at)
-      th
+      th= Question.human_attribute_name('状態')
       th
   tbody
     - @questions.each do |question|

@@ -19,6 +19,10 @@ class QuestionsController < ApplicationController
     @question = current_user.questions.new(question_params)
 
     if @question.save
+      receivers = User.all.where.not(id: current_user.id)
+      SampleMailer.with(user_from: current_user, 
+                        user_to: receivers,
+                        question: @question).send_when_question.deliver_now
       redirect_to questions_url, notice: "質問「#{@question.title}」を投稿しました。"
     else
       render :new

@@ -2,6 +2,7 @@ h1 ログイン
 
 .nav.justify-content-end
   = link_to '管理画面用ログイン', 'admin/login', class: 'nav-link'
+  = link_to '新規登録', new_user_path, class: 'btn btn-primary'
 
 = form_with scope: :session, local: true do |f|
   .form-group

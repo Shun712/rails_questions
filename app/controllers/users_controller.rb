@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_action :login_required, only: %i[new create]
 
   def index
     @users = User.paginate(page: params[:page])
@@ -20,6 +21,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      log_in @user
       redirect_to user_path(@user), notice: "ユーザー「#{@user.name}」を登録しました。"
     else
       render :new

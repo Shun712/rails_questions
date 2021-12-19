@@ -3,6 +3,7 @@ class QuestionsController < ApplicationController
   before_action :set_q, only: %i[index search]
 
   def index
+    @questions = Question.includes(:user)
     if params[:solved_check] == 'false'
       @questions = Question.where(solved_check: false).paginate(page: params[:page])
     elsif params[:solved_check] == 'true'
@@ -31,7 +32,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @answers = @question.answers.includes(:user).order(created_at: :desc)
+    @answers = @question.answers.includes(:user).order(created_at: :asc)
     @answer = Answer.new
   end
 

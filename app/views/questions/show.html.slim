@@ -1,39 +1,53 @@
 h1 質問の詳細
 
-.nav.justify-content-end
-  = link_to '質問一覧', questions_path, class: 'nav-link'
-table.table.table-hover
-  tbody
-    tr
-      th= User.human_attribute_name('投稿者')
-      td= @question.user.name
-    tr
-      th= Question.human_attribute_name(:title)
-      td= @question.title
-    tr
-      th= Question.human_attribute_name(:content)
-      td= auto_link(simple_format(h(@question.content), {}, sanitize: false, wrapper_tag: "div"))
-    tr
-      th= Question.human_attribute_name(:created_at)
-      td= @question.created_at.strftime('%Y/%m/%d %H:%M')
-
 - if @question.user == current_user
-  = link_to '編集', edit_question_path, class: 'btn btn-primary mr-3'
-  = link_to '削除', @question, method: :delete,
-                            data: { confirm: "質問「#{@question.title}」を削除します。よろしいでしょうか？" }, class: 'btn btn-danger'
-  - if @question.solved_check
-    = link_to '未解決に戻す', question_path(@question.id, question: {solved_check: false}), method: :put
-  - else
-    = link_to '解決済み', question_path(@question.id, question: {solved_check: true}), method: :put
+  .d-flex.justify-content-md-end
+    = link_to '編集', edit_question_path, class: 'btn btn-primary mx-2'
+    = link_to '削除', @question, method: :delete,
+                     data: { confirm: "質問「#{@question.title}」を削除します。よろしいでしょうか？" }, class: 'btn btn-danger'
+    - if @question.solved_check
+      = link_to '未解決に戻す', question_path(@question.id, question: {solved_check: false}), method: :put, class: 'btn btn-warning mx-3'
+    - else
+      = link_to '解決済みにする', question_path(@question.id, question: {solved_check: true}), method: :put, class: 'btn btn-success mx-3'
+  .d-flex.justify-content-md-end  
+    = @question.created_at.strftime('%Y/%m/%d %H:%M')
 
-= form_with(model:[@question, @answer], local: true) do |f|
-  .form-group
-    = f.text_area :content, row: 5, class: 'form-control', id: 'answer_content', placeholder: '回答' 
-    = f.submit '回答する', class: 'btn btn-primary'
+.container
+  .d-flex.justify-content-center
+    .row.d-flex.align-items-center
+      .col-md-2
+        - if @question.user.picture.attached?
+          = link_to(image_tag(@question.user.picture.variant(resize:'50x50')), user_path(@question.user))
+        - else
+          = link_to image_tag('/no_image.png', size:'50x50'), user_path(@question.user)
+      .col-md-10
+        h4= @question.title
+        
+.container
+  .row
+    p.text-left
+      = auto_link(simple_format(h(@question.content), {}, sanitize: false, wrapper_tag: "div"))
+.border-bottom.my-3
 
-h4 回答一覧
-- if @answers
-  - @answers.each do |answer|
-    p  = answer.user.name
-    p  = answer.content
-    p  = answer.created_at.strftime('%Y/%m/%d %H:%M')
+.container
+  .row.justify-content-md-center
+    .col-6
+      = form_with(model:[@question, @answer], local: true) do |f|
+        .form-group
+          = f.text_area :content, row: 5, size: "5x5", class: 'form-control', id: 'answer_content', placeholder: '回答' 
+          = f.submit '回答する', class: 'btn btn-primary my-3'
+.border-bottom.mb-3
+
+.container
+  - if @answers
+    - @answers.each do |answer|
+      .d-flex.justify-content-center
+        .row.d-flex.align-items-center
+          .col-md-2
+            - if @question.user.picture.attached?
+              = link_to(image_tag(answer.user.picture.variant(resize:'50x50')), user_path(answer.user))
+            - else
+              = link_to image_tag('/no_image.png', size:'50x50'), user_path(answer.user)
+          .col-md-10
+            = answer.content
+          .border-bottom.my-3

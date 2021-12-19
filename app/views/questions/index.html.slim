@@ -1,16 +1,27 @@
 h1 質問一覧
 
-= link_to '質問投稿をする', new_question_path, class: 'btn btn-primary'
-= link_to 'すべて', questions_path, class: 'btn btn-primary'
-= link_to '未解決', questions_path(solved_check: false), class: 'btn btn-primary'
-= link_to '解決済み', questions_path(solved_check: true), class: 'btn btn-primary'
+.btn-group[role="group" aria-label="Basic radio toggle button group"]
+  input.btn-check[type="radio"]
+  label[for="btnradio2"]
+    = link_to 'すべて', questions_path, class: 'btn btn-outline-primary'
+  input#btnradio2.btn-check[type="radio" name="btnradio" autocomplete="off"]
+  label[for="btnradio2"]
+    = link_to '未解決', questions_path(solved_check: false), class: 'btn btn-outline-primary'
+  input#btnradio3.btn-check[type="radio" name="btnradio" autocomplete="off"]
+  label[for="btnradio3"]
+    = link_to '解決済み', questions_path(solved_check: true), class: 'btn btn-outline-primary'
 
-= search_form_for @q, url: search_questions_path do |f|
-  .form-group
-    = f.search_field :title_cont, placeholder: '検索ワード', class: 'form-control'
-  .form-group
-    = f.submit nil, class: 'btn btn-primay'
+= link_to '質問投稿をする', new_question_path, class: 'btn btn-success mx-3'
 
-= render partial: 'question', locals: { question: @question }
+.container.m-3
+  = search_form_for @q, url: search_questions_path do |f|
+    .form-group.row.justify-content-md-center
+      .col-md-2
+        = f.search_field :title_cont, placeholder: '検索ワード', class: 'form-control'
+      .col-md-1
+        = f.submit nil, class: 'btn btn-primary'
+
+= render @questions
+
 .container
   = will_paginate @questions, previous_label: '&lt 前へ', next_label: '次へ &gt'

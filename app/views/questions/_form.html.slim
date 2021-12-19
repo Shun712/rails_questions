@@ -4,9 +4,11 @@
       li= message
 
 = form_with model: question, local: true do |f|
-  .form-group
+  .form-group.my-3
     = f.text_field :title, class: 'form-control', id: 'question_title', placeholder: '質問タイトル'
-    /placeholderを活用
   .form-group
-    = f.text_area :content, row: 5, class: 'form-control', id: 'question_content', placeholder: '質問内容' 
-    = f.submit nil, class: 'btn btn-primary'
+    = f.text_area :content, row: 25, size: "20x10", class: 'form-control', id: 'question_content', placeholder: '質問内容' 
+    = f.submit nil, class: 'btn btn-primary mt-3'
+    - if question.user == current_user
+      = link_to '削除', question, method: :delete,
+        data: { confirm: "質問「#{question.title}」を削除します。よろしいでしょうか？" }, class: 'btn btn-danger mt-3 mx-5'

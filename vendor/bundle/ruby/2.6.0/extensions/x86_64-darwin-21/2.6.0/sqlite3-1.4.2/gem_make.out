@@ -1,5 +1,5 @@
 current directory: /Users/shun/rails_questions/vendor/bundle/ruby/2.6.0/gems/sqlite3-1.4.2/ext/sqlite3
-/Users/shun/.rbenv/versions/2.6.5/bin/ruby -I /Users/shun/.rbenv/versions/2.6.5/lib/ruby/2.6.0 -r ./siteconf20211218-73848-r9kplh.rb extconf.rb
+/Users/shun/.rbenv/versions/2.6.5/bin/ruby -I /Users/shun/.rbenv/versions/2.6.5/lib/ruby/2.6.0 -r ./siteconf20211220-45859-zx3047.rb extconf.rb
 checking for sqlite3.h... yes
 checking for pthread_create() in -lpthread... yes
 checking for -ldl... yes
@@ -61,4 +61,4 @@ ld: warning: dylib (/usr/local/opt/sqlite/lib/libsqlite3.dylib) was built for ne
 
 current directory: /Users/shun/rails_questions/vendor/bundle/ruby/2.6.0/gems/sqlite3-1.4.2/ext/sqlite3
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 sqlite3_native.bundle ./.gem.20211218-73848-1wo2l9m/sqlite3
+/usr/bin/install -c -m 0755 sqlite3_native.bundle ./.gem.20211220-45859-6cmctg/sqlite3

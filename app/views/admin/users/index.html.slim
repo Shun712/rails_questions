@@ -23,3 +23,6 @@
                     td
                       = link_to '削除', [:admin, user], method: :delete,
                         data: { confirm: "質問「#{user.name}」を削除します。よろしいでしょうか？" }, class: 'btn btn-danger'
+.mb-3
+  = paginate @users
+  = page_entries_info @users

@@ -3,7 +3,7 @@ class Admin::QuestionsController < ApplicationController
   before_action :set_q, only: %i[index search]
 
   def index
-    @questions = Question.all
+    @questions = Question.all.page(params[:page]).per(10)
   end
 
   def destroy
@@ -12,7 +12,7 @@ class Admin::QuestionsController < ApplicationController
   end
 
   def search
-    @questions = @q.result.includes(:user).page(params[:page])
+    @questions = @q.result.includes(:user).page(params[:page]).per(10)
   end
 
   private

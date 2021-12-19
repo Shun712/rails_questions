@@ -39,8 +39,7 @@ gem 'bootstrap'
 gem 'rails_autolink'
 gem 'pry-rails'
 gem 'ransack'
-gem 'will_paginate', '3.1.7'
-gem 'bootstrap-will_paginate', '1.0.0'
+gem 'kaminari'
 gem 'gimei'
 
 # Reduces boot times through caching; required in config/boot.rb

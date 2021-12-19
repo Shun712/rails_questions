@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   skip_before_action :login_required, only: %i[new create]
 
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.page(params[:page]).per(10)
   end
 
   def show

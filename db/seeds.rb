@@ -20,8 +20,8 @@ User.create!(
 end
 
 50.times do |n|
-  Question.create!(title: "質問タイトル#{n}",
-                   content: "質問サンプル#{n}",
+  Question.create!(title: "質問タイトル#{n+1}",
+                   content: "質問サンプル#{n+1}",
                    user_id: User.find(n+1).id,
                    solved_check: [false, true].sample)
 end
@@ -29,5 +29,5 @@ end
 48.times do |n|
   Answer.create!(question_id: Question.find(n+2).id,
                  user_id: User.find(n+2).id,
-                 content: "回答#{n}")
+                 content: "エラーログを見せてください")
 end

@@ -1,7 +1,18 @@
 h1 検索結果
 
 - if @questions.any?
-  = render partial: 'question', locals: { question: @question }
-  = will_paginate @questions, previous_label: '&lt 前へ', next_label: '次へ &gt'
+  .mb-3
+    table.table.table-hover
+      thread.thread-default
+        tr
+          th= User.human_attribute_name('投稿者')
+          th= Question.human_attribute_name(:title)
+          th= Question.human_attribute_name(:created_at)
+          th= Question.human_attribute_name('状態')
+      tbody
+        = render @questions
+  .mb-3
+    = paginate @questions
+    = page_entries_info @questions
 - else
-  h1 '検索結果がありません。'
+  h1 がありません。

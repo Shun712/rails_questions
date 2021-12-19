@@ -5,11 +5,11 @@ class QuestionsController < ApplicationController
   def index
     @questions = Question.includes(:user)
     if params[:solved_check] == 'false'
-      @questions = Question.where(solved_check: false).paginate(page: params[:page])
+      @questions = Question.where(solved_check: false).page(params[:page]).per(10)
     elsif params[:solved_check] == 'true'
-      @questions = Question.where(solved_check: true).paginate(page: params[:page])
+      @questions = Question.where(solved_check: true).page(params[:page]).per(10)
     else
-      @questions = Question.paginate(page: params[:page])
+      @questions = Question.page(params[:page]).per(10)
     end
   end
 
@@ -50,7 +50,7 @@ class QuestionsController < ApplicationController
   end
 
   def search
-    @questions = @q.result.includes(:user).page(params[:page])
+    @questions = @q.result.includes(:user).page(params[:page]).per(10)
   end
 
   private

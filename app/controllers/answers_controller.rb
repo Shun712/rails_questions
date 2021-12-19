@@ -2,7 +2,6 @@ class AnswersController < ApplicationController
 
   def create
     @question = Question.find(params[:question_id])
-    @user = @question.user
     @answer = @question.answers.build(user_id: current_user.id, content: params[:answer][:content])
     if !@question.nil? && @answer.save
       flash[:success] = "コメントを追加しました!"

@@ -21,7 +21,7 @@ end
 
 50.times do |n|
   Question.create!(title: "質問タイトル#{n+1}",
-                   content: "質問サンプル#{n+1}",
+                   content: "rails sができなくなりました。",
                    user_id: User.find(n+1).id,
                    solved_check: [false, true].sample)
 end

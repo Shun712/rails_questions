@@ -30,12 +30,16 @@ h1 質問の詳細
 .border-bottom.my-3
 
 .container
-  .row.justify-content-md-center
-    .col-6
-      = form_with(model:[@question, @answer], local: true) do |f|
-        .form-group
-          = f.text_area :content, row: 5, size: "5x5", class: 'form-control', id: 'answer_content', placeholder: '回答' 
-          = f.submit '回答する', class: 'btn btn-primary my-3'
+  - if @answer.errors.present?
+  ul#error_explanation
+    -@answer.errors.full_messages.each do |message|
+      li= message
+    .row.justify-content-md-center
+      .col-6
+        = form_with(model:[@question, @answer], local: true) do |f|
+          .form-group
+            = f.text_area :content, row: 5, size: "5x5", class: 'form-control', id: 'answer_content', placeholder: '回答' 
+            = f.submit '回答する', class: 'btn btn-primary my-3'
 .border-bottom.mb-3
 
 .container
@@ -43,11 +47,11 @@ h1 質問の詳細
     - @answers.each do |answer|
       .d-flex.justify-content-center
         .row.d-flex.align-items-center
-          .col-md-2
+          .col-md-3
             - if @question.user.picture.attached?
               = link_to(image_tag(answer.user.picture.variant(resize:'50x50')), user_path(answer.user))
             - else
               = link_to image_tag('/no_image.png', size:'50x50'), user_path(answer.user)
-          .col-md-10
+          .col-md-9
             = answer.content
           .border-bottom.my-3

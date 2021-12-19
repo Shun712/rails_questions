@@ -12,7 +12,7 @@
                   th
               tbody
                 - @users.each do |user|
-                  tr
+                  tr.align-middle
                     - if user.picture.attached?
                       td= image_tag user.picture.variant(resize:'40x40')
                     - else

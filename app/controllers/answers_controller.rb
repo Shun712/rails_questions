@@ -5,7 +5,7 @@ class AnswersController < ApplicationController
     @user = @question.user
     @answer = @question.answers.build(user_id: current_user.id, content: params[:answer][:content])
     if !@question.nil? && @answer.save
-      flash[:success] = "コメントを追加しました！"
+      flash[:success] = "コメントを追加しました!"
       receivers = User.where(id: @question.user).where(id: @answer.user).where.not(id: current_user.id).distinct
       SampleMailer.with(user_from: current_user,
                         user_to: receivers,

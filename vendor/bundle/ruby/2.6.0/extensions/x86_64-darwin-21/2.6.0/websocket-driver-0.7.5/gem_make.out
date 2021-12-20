@@ -1,5 +1,5 @@
 current directory: /Users/shun/rails_questions/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.5/ext/websocket-driver
-/Users/shun/.rbenv/versions/2.6.5/bin/ruby -I /Users/shun/.rbenv/versions/2.6.5/lib/ruby/2.6.0 -r ./siteconf20211220-61785-fl35sf.rb extconf.rb
+/Users/shun/.rbenv/versions/2.6.5/bin/ruby -I /Users/shun/.rbenv/versions/2.6.5/lib/ruby/2.6.0 -r ./siteconf20211220-77587-qtchuw.rb extconf.rb
 creating Makefile
 
 current directory: /Users/shun/rails_questions/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.5/ext/websocket-driver
@@ -12,4 +12,4 @@ linking shared-object websocket_mask.bundle
 
 current directory: /Users/shun/rails_questions/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.5/ext/websocket-driver
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 websocket_mask.bundle ./.gem.20211220-61785-3ufm41
+/usr/bin/install -c -m 0755 websocket_mask.bundle ./.gem.20211220-77587-21g2gj

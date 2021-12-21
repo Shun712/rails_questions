@@ -1,5 +1,0 @@
-= form_with model: @answer, local: true do |f|
-  .form-group
-    = hidden_field_tag :question_id, @question.id
-    = f.text_area :content, row: 5, class: 'form-control', id: 'answer_content', placeholder: '回答内容' 
-    = f.submit '回答する', class: 'btn btn-primary'

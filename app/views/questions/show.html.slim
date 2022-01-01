@@ -48,7 +48,7 @@ h1 質問の詳細
       .d-flex.justify-content-center
         .row.d-flex.align-items-center
           .col-md-3
-            - if @question.user.picture.attached?
+            - if answer.user.picture.attached?
               = link_to(image_tag(answer.user.picture.variant(resize:'50x50')), user_path(answer.user))
             - else
               = link_to image_tag('/no_image.png', size:'50x50'), user_path(answer.user)

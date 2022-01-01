@@ -1,5 +1,5 @@
 .container.m-3
-  = search_form_for @q, url: search_admin_questions_path do |f|
+  = search_form_for @q, url: search_questions_path do |f|
     .form-group.row.justify-content-md-center
       .col-md-2
         = f.search_field :title_cont, placeholder: '検索ワード', class: 'form-control'

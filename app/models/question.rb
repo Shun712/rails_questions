@@ -1,6 +1,6 @@
 class Question < ApplicationRecord
   validates :title, presence: true, length: { maximum: 30 }
-  validates :content, presence: true
+  validates :content, presence: true, length: { maximum: 500 }
   before_validation :set_titleless_title
   belongs_to :user
   has_many :answers, dependent: :destroy

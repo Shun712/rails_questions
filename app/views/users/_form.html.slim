@@ -6,7 +6,7 @@
 = form_with model: user, local: true do |f|
   .form-group.mt-2
     = f.label :picture, 'プロフィール画像'
-    = f.file_field :picture
+    = f.file_field :picture, class: 'form-control'
     - if user.picture.attached?
       = image_tag @user.picture, size: '100x100'
   .form-group.mt-2

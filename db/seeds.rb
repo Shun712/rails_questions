@@ -9,7 +9,7 @@ User.create!(
 
 99.times do |n|
   name  = Gimei.name
-  nickname = Gimei.name
+  nickname = name
   email = "sample-#{n+1}@example.com"
   password = "foobar"
   User.create!(name:  name,

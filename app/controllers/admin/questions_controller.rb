@@ -1,14 +1,23 @@
-class Admin::QuestionsController < ApplicationController
-  before_action :required_admin
+class Admin::QuestionsController < Admin::BaseController
   before_action :set_q, only: %i[index search]
 
   def index
-    @questions = Question.page(params[:page]).per(10)
+    if params[:solved] == 'true'
+      @q.solved_eq = true
+    elsif params[:solved] == 'false'
+      @q.solved_eq = false
+    end
+    @questions =
+      @q
+        .result(distinct: true)
+        .order(created_at: :desc)
+        .page(params[:page])
+        .per(5)
   end
 
   def destroy
     @question.destroy
-    redirect_to questions_url, notice: "質問「#{@question.title}」を削除しました。"
+    redirect_to admin_questions_path, notice: "質問「#{@question.title}」を削除しました。"
   end
 
   def search
@@ -16,10 +25,6 @@ class Admin::QuestionsController < ApplicationController
   end
 
   private
-
-    def required_admin
-      redirect_to root_path unless current_user.admin?
-    end
 
     def set_q
       @q = Question.ransack(params[:q])

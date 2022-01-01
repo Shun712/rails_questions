@@ -1,16 +1,14 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: %i[edit update destroy]
   before_action :set_q, only: %i[index search]
-
+  
   def index
-    @questions = Question.includes(:user)
     if params[:solved_check] == 'false'
-      @questions = Question.where(solved_check: false).page(params[:page]).per(10)
+      @q.solved_check = false
     elsif params[:solved_check] == 'true'
-      @questions = Question.where(solved_check: true).page(params[:page]).per(10)
-    else
-      @questions = Question.page(params[:page]).per(10)
+      @q.solved_check = true
     end
+    set_questions
   end
 
   def new
@@ -19,12 +17,13 @@ class QuestionsController < ApplicationController
 
   def create
     @question = current_user.questions.new(question_params)
-
     if @question.save
-      receivers = User.all.where.not(id: current_user.id)
-      SampleMailer.with(user_from: current_user, 
-                        user_to: receivers,
-                        question: @question).send_when_question.deliver_now
+      receivers = User.where.not(id: current_user.id)
+      receivers.each do |user|
+        SampleMailer.with(user_from: current_user,
+                          user_to: user,
+                          question: @question).send_when_question.deliver_now
+      end
       redirect_to questions_url, notice: "質問「#{@question.title}」を投稿しました。"
     else
       render :new
@@ -41,17 +40,31 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    @question.update!(question_params)
-    redirect_to questions_url, notice: "質問「#{@question.title}」を更新しました。" 
+    if current_user?(@question.user)
+      if @question.update(question_params)
+        redirect_to @question, notice: "質問「#{@question.title}」を更新しました。" 
+      else
+        render :edit
+      end
+    else
+      render :edit, notice: "他人の質問を更新できません。"
+    end
   end
 
   def destroy
-    @question.destroy
-    redirect_to questions_url, notice: "質問「#{@question.title}」を削除しました。"
+    if current_user?(@question.user)
+      if @question.destroy
+         redirect_to questions_url, notice: "質問「#{@question.title}」を削除しました。"
+      else
+        render :edit
+      end
+    else
+      render :edit, notice: "他人の質問を削除できません。"
+    end
   end
 
   def search
-    @questions = @q.result.includes(:user).page(params[:page]).per(10)
+    set_questions
   end
 
   private
@@ -66,5 +79,13 @@ class QuestionsController < ApplicationController
 
     def set_q
       @q = Question.ransack(params[:q])
+    end
+
+    def set_questions
+      @questions = @q
+                     .result(distinct: true)
+                     .order(created_at: :desc)
+                     .page(params[:page])
+                     .per(10)
     end
 end

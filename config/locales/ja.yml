@@ -17,6 +17,7 @@ ja:
         content: 質問内容
         created_at: 投稿日時
         updated_at: 更新日時
+        situation: 状態
       user:
         name: 名前
         nickname: ニックネーム
@@ -27,6 +28,7 @@ ja:
         password_confirmation: パスワード(確認)
         created_at: 登録日時
         updated_at: 更新日時
+        contributer: 投稿者
       answer:
         question_id: 質問
         user_id: 質問投稿者

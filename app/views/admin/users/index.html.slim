@@ -1,0 +1,28 @@
+.container
+  .row.justify-content-md-center
+    h2 ユーザー一覧
+    .container.mt-4
+        .row.justify-content-md-center
+          .col.col-md-9.col-md-offset-3
+            table.table.table-hover
+              thread.thread-default
+                tr
+                  th= User.human_attribute_name(:picture)
+                  th= User.human_attribute_name(:nickname)
+                  th= User.human_attribute_name(:email)
+                  th
+              tbody
+                - @users.each do |user|
+                  tr.align-middle
+                    - if user.picture.attached?
+                      td= image_tag user.picture.variant(resize:'40x40')
+                    - else
+                      th= image_tag '/no_image.png', size:'40x40'
+                    td= user.nickname
+                    td= user.email
+                    td
+                      = link_to '削除', [:admin, user], method: :delete,
+                        data: { confirm: "質問「#{user.name}」を削除します。よろしいでしょうか？" }, class: 'btn btn-danger'
+.mb-3
+  = paginate @users
+  = page_entries_info @users

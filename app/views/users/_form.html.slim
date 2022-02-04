@@ -1,0 +1,23 @@
+- if user.errors.present?
+  ul#error_explanation
+    -user.errors.full_messages.each do |message|
+      li= message
+
+= form_with model: user, local: true do |f|
+  .form-group.mt-2
+    = f.label :picture, 'プロフィール画像'
+    = f.file_field :picture, class: 'form-control'
+    - if user.picture.attached?
+      = image_tag @user.picture, size: '100x100'
+  .form-group.mt-2
+    = f.text_field :name, placeholder: '名前', class: 'form-control'
+  .form-group.mt-2
+    = f.text_field :nickname, placeholder: 'ニックネーム', class: 'form-control'
+  .form-group.mt-2
+    = f.text_field :email, placeholder: 'メールアドレス', class: 'form-control'
+  - if !logged_in?
+    .form-group.mt-2
+      = f.password_field :password, placeholder: 'パスワード', class: 'form-control'
+    .form-group.mt-2.mb-2
+      = f.password_field :password_confirmation, placeholder: 'パスワード(確認)', class: 'form-control'
+  = f.submit '登録する', class: 'btn btn-primary mt-2'

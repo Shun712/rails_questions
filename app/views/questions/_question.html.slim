@@ -1,0 +1,8 @@
+tr.align-middle
+  - if question.user.picture.attached?
+    td= link_to(image_tag(question.user.picture.variant(resize:'50x50')), user_path(question.user))
+  - else
+    td= link_to image_tag('/no_image.png', size:'50x50'), user_path(question.user)
+  td= link_to question.title, question_path(question)
+  td= question.created_at.strftime('%Y/%m/%d %H:%M')
+  td= question.solved_check ? '解決済み' : '未解決'

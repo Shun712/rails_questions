@@ -1,0 +1,23 @@
+.mb-3
+table.table.table-hover
+  thread.thread-default
+    tr
+      th= User.human_attribute_name(:name)
+      th= Question.human_attribute_name(:title)
+      th= Question.human_attribute_name('状態')
+      th
+  tbody
+    - @questions.each do |question|
+      tr
+        - if question.user.picture.attached?
+          td= image_tag question.user.picture.variant(resize:'50x50')
+        - else
+          td= question.user.name
+        td= question.title
+        td= question.solved_check ? '解決済み' : '未解決'
+        td
+            = link_to '削除', [:admin, question], method: :delete,
+                              data: { confirm: "質問「#{question.title}」を削除します。よろしいでしょうか？" }, class: 'btn btn-danger'
+.mb-3
+  = paginate @questions
+  = page_entries_info @questions
